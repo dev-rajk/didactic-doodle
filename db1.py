@@ -94,7 +94,8 @@ def update_event(event_id, quiz_name, date, time, category, venue, location, org
     })
 
 def delete_event(event_id):
-    db.collection('events').document(event_id).delete()
+    doc_ref = db.collection('events').document(event_id)
+    doc_ref.update({'status': 'Deleted'})
 
 visitor_ref = db.collection("visitor_data").document("counter")
 
@@ -118,3 +119,4 @@ def update_vc(count):
         visitor_ref.update({"count": count})
     except Exception as e:
         print(f"Error updating visitor count: {e}")
+
