@@ -208,7 +208,9 @@ def link_string(link_str):
 # 1. Viewing Events
 if choice == "View Events":
     st.subheader("Upcoming Quizzes")
-    approved_events = get_events("Approved")
+    load_cal = st.checkbox(label="want to load calendar? /n Sure????? Come on man?")
+    if load_cal:
+        approved_events = get_events("Approved")
     
     if approved_events:
         # Prepare events for FullCalendar
