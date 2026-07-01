@@ -1,5 +1,6 @@
 import streamlit as st
 from db1 import add_event, get_events, approve_event, update_event, delete_event, decline_event
+from datetime import datetime
 import pandas as pd
 import json
 
@@ -210,7 +211,7 @@ if choice == "View Events":
     st.subheader("Upcoming Quizzes")
     load_cal = st.checkbox(label="want to load calendar? /n Sure????? Come on man?")
     if load_cal:
-        approved_events = get_events("Approved")
+        approved_events = get_events("Approved") 
     
     if approved_events:
         # Prepare events for FullCalendar
@@ -297,8 +298,8 @@ elif choice == "Admin Panel":
 
     if password == BASIC_ADMIN_PASSWORD:
         # Fetch events based on status
-        approved_events = get_events("Approved")
-        pending_events = get_events("Pending")
+        approved_events = get_events_dated(str(datetime.now().date()), "Approved")
+        pending_events = get_events_dated(str(datetime.now().date()), "Pending")
         declined_events = get_events("Declined")
     
         # Tab to switch between managing approved and pending events
